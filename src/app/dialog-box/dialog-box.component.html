@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Add Contact</h1>
+<div mat-dialog-content>
+  <!-- <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Name" matInput [(ngModel)]="local_data.name">
+  </mat-form-field> -->
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-tab-group #matgroup>
+        <mat-tab label="Details">
+            <div class="tab-content">
+                <div class="content-container tab-content-height">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Enter your First Name</mat-label>
+                        <input matInput formControlName="firstName" [(ngModel)]="local_data.firstName" required>
+                    </mat-form-field>
+
+                </div>
+                <div class="content-container tab-content-height">
+
+                    <mat-form-field>
+                        <mat-label>Enter your Last Name</mat-label>
+                        <input matInput formControlName="lastName" [(ngModel)]="local_data.lastName" required>
+                    </mat-form-field>
+
+                </div>
+                <div class="content-container tab-content-height">
+
+                    <mat-form-field>
+                        <mat-label>Enter your Phone</mat-label>
+                        <input matInput formControlName="phone" [(ngModel)]="local_data.phone" required>
+                    </mat-form-field>
+                </div>
+                <!-- <mat-dialog-actions><button mat-raised-button color="primary">Save</button>
+                    <button mat-button mat-dialog-close>Close</button>
+                </mat-dialog-actions> -->
+
+
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+</form>
+
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.name}}</b>
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()"  mat-flat-button color="primary">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
