@@ -1,6 +1,7 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Contacts {
   firstName: string;
@@ -20,25 +21,35 @@ export class DialogBoxComponent {
   local_data: any;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogBoxComponent>,
+    private toastr: ToastrService, public dialogRef: MatDialogRef<DialogBoxComponent>,
     //@Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: Contacts, private formBuilder: FormBuilder,) {
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Contacts, private formBuilder: FormBuilder) {
     console.log(data);
     this.local_data = { ...data };
     this.action = this.local_data.action;
-  }
-  ngOnInit(): void {
     this.form = this.formBuilder.group({
       id: '',
       firstName: '',
-      lastName: '',
+      lastName: new FormControl('', [
+        Validators.required
+      ]),
       phone: ''
     });
   }
+  ngOnInit(): void {
+  }
 
   doAction() {
-    console.log('this.local_data', this.local_data);
-    this.dialogRef.close({ event: this.action, data: this.local_data });
+    if (this.form.valid) {
+      this.dialogRef.close({ event: this.action, data: this.local_data });
+      if (this.action === 'Add') this.toastr.success('Contact Added Successfully!');
+      if (this.action === 'Update') this.toastr.success('Contact Updated Successfully!');
+      if (this.action === 'Delete') this.toastr.success('Contact Deleted Successfully!');
+    }
+    else {
+      this.toastr.error('Please enter the valid input values!');
+    }
+
   }
 
   closeDialog() {

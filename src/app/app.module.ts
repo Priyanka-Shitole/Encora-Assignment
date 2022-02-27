@@ -7,10 +7,11 @@ import { ContactsService } from './Services/contacts.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -28,7 +29,8 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    ToastrModule.forRoot()
   ],
   providers: [ContactsService],
   bootstrap: [AppComponent]

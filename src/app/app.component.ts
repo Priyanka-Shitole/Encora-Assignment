@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+
 export interface Contacts {
   firstName: string;
   lastName: string;
